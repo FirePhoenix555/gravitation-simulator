@@ -13,14 +13,13 @@ public class GameHandler extends JPanel implements Runnable {
 	final int fps = 30; // how often the game updates
 	
 	Thread gameThread;
-	KeyHandler kh = new KeyHandler();
 	
-	Player player;
+	MouseHandler mh = new MouseHandler();
 	
 	public GameHandler() {
 		setPreferredSize(new Dimension(width, height));
 		setDoubleBuffered(true);
-		addKeyListener(kh);
+		addMouseListener(mh);
 		setFocusable(true);
 		
 		initialize();
@@ -31,7 +30,6 @@ public class GameHandler extends JPanel implements Runnable {
 	
 	public void initialize() {
 		this.setBackground(Color.black);
-		player = new Player(0, 0, 5, 5); // x, y, w, h
 	}
 
 	@Override
@@ -56,7 +54,7 @@ public class GameHandler extends JPanel implements Runnable {
 	}
 	
 	private void update() {
-		player.update(kh);
+		mh.updateMouseLocation(this);
 	}
 	
 	@Override
@@ -65,7 +63,7 @@ public class GameHandler extends JPanel implements Runnable {
 		
 		Graphics2D g = (Graphics2D) g_;
 		
-		player.draw(g);
+		// 
 	
 		g.dispose();
 	}
