@@ -4,16 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-public class TextHandler extends GameObject {
+public class TextHandler {
 	public String text;
 	public int x, y;
 	private Color c = Color.white;
 	private Font f;
 	final private static int maxWidth = 25; // in CHARACTERS not pixels
 	
-	public TextHandler(GameHandler gh_, String t_, int x_, int y_) {
-		super(x_, y_, 0, 0);
-		
+	public TextHandler(String t_, int x_, int y_) {
 		initialize(t_, x_, y_);
 	}
 	
@@ -45,7 +43,6 @@ public class TextHandler extends GameObject {
 		f = f_;
 	}
 	
-	@Override
 	public void draw(Graphics2D g) {
 		g.setColor(c);
 		g.setFont(f);

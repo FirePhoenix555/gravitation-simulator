@@ -9,12 +9,15 @@ import javax.swing.JPanel;
 public class GameHandler extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
-	final int width = 100, height = 100;
+	final int width = 500, height = 500;
 	final int fps = 30; // how often the game updates
 	
 	Thread gameThread;
 	
 	MouseHandler mh = new MouseHandler();
+	
+	Planet p = new Planet(width/2, height/2, 25);
+	Satellite s = new Satellite(350, 250, 10);
 	
 	public GameHandler() {
 		setPreferredSize(new Dimension(width, height));
@@ -55,6 +58,8 @@ public class GameHandler extends JPanel implements Runnable {
 	
 	private void update() {
 		mh.updateMouseLocation(this);
+		
+		s.update();
 	}
 	
 	@Override
@@ -63,7 +68,8 @@ public class GameHandler extends JPanel implements Runnable {
 		
 		Graphics2D g = (Graphics2D) g_;
 		
-		// 
+		p.draw(g);
+		s.draw(g);
 	
 		g.dispose();
 	}
