@@ -5,23 +5,26 @@ import java.awt.Graphics2D;
 
 public class Planet {
 	
-	public static final double density = 1;
+	public static final double density = 300000;
 	
-	int x, y, r;
+	int x, y;
+	double r;
 	
-	float mass;
+	int displayRadius = 20;
 	
-	public Planet(int x_, int y_, int r_) {
+	double mass;
+	
+	public Planet(int x_, int y_, double r_) {
 		x = x_;
 		y = y_;
 		r = r_;
 		
-		mass = (float) (density * Math.PI * r*r); // 2d volume = area
+		mass = 1.9891 * Math.pow(10,30);//density * Math.PI * r*r; // 2d volume = area
 	}
 	
 	
 	public void draw(Graphics2D g) {
 		g.setColor(Color.darkGray);
-		g.fillOval(x - r, y - r, r*2, r*2);
+		g.fillOval(x - displayRadius, y - displayRadius, displayRadius*2, displayRadius*2);
 	}
 }

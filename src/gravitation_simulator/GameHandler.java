@@ -9,15 +9,17 @@ import javax.swing.JPanel;
 public class GameHandler extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
+	public static final double scale = 150000000000d/200;// 20000000; // meters per pixel
+	
 	final int width = 500, height = 500;
-	final int fps = 30; // how often the game updates
+	final static int fps = 30; // how often the game updates
 	
 	Thread gameThread;
 	
 	MouseHandler mh = new MouseHandler();
 	
-	Planet p = new Planet(width/2, height/2, 25);
-	Satellite s = new Satellite(350, 250, 10);
+	Planet p = new Planet(width/2, height/2, (int) (695700000/scale));
+	Satellite s = new Satellite(p, width/2 + 200, height / 2, (int) (6378100/scale));
 	
 	public GameHandler() {
 		setPreferredSize(new Dimension(width, height));
@@ -59,6 +61,13 @@ public class GameHandler extends JPanel implements Runnable {
 	private void update() {
 		mh.updateMouseLocation(this);
 		
+		double distToPlanet = Math.sqrt((s.x.x - p.x)*(s.x.x - p.x) + (s.x.y - p.y)*(s.x.y - p.y))*scale;
+		
+		double magnitude = (Force.G * p.mass * s.mass) / (distToPlanet*distToPlanet);
+		double direction = Vector.getDir((int) s.x.x, (int) s.x.y, p.x, p.y);
+		Force f = new Force(magnitude, direction);
+//		System.out.println(magnitude/scale);
+		s.applyForce(f);
 		s.update();
 	}
 	
