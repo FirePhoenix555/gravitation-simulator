@@ -7,7 +7,7 @@ public class Planet {
 	
 	public static final double density = 300000;
 	
-	int x, y;
+	double x, y;
 	double r;
 	
 	int displayRadius = 20;
@@ -25,6 +25,6 @@ public class Planet {
 	
 	public void draw(Graphics2D g) {
 		g.setColor(Color.darkGray);
-		g.fillOval(x - displayRadius, y - displayRadius, displayRadius*2, displayRadius*2);
+		g.fillOval((int) x - displayRadius, (int) y - displayRadius, displayRadius*2, displayRadius*2);
 	}
 }

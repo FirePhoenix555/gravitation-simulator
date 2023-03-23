@@ -10,12 +10,13 @@ public class Satellite {
 	
 	public static final double density = 5510000000d;
 	
-	int r, displayRadius;
+	double r;
+	int displayRadius;
 	double mass;
 	
 	Vector x, v, a;
 	
-	public Satellite(Planet p, float x_, float y_, int r_) {
+	public Satellite(Planet p, double x_, double y_, double r_) {
 		r = r_;
 		displayRadius = 5;
 		mass = 6 * Math.pow(10, 24);//density * 4/3f * Math.PI * r*r*r;
@@ -29,7 +30,7 @@ public class Satellite {
 	
 	public void draw(Graphics2D g) {
 		g.setColor(Color.white);
-		g.fillOval((int) (x.x - displayRadius), (int) (x.y - displayRadius), displayRadius*2, displayRadius*2);
+		g.fillOval((int) x.x - displayRadius, (int) x.y - displayRadius, displayRadius*2, displayRadius*2);
 	}
 	
 	public void update() {

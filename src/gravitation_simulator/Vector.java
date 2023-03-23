@@ -38,7 +38,7 @@ public class Vector {
 	public Vector scale(double s) {
 //		System.out.println(y*s);
 //		System.out.println(y);
-		return new Vector((float) x*s, (float) y*s);
+		return new Vector(x*s, y*s);
 	}
 	
 	public static double dot(Vector a, Vector b) {
@@ -49,7 +49,7 @@ public class Vector {
 		return a.r * b.r * Math.sin(Math.abs(a.t - b.t));
 	}
 	
-	public static double getDir(int x1, int y1, int x2, int y2) {
+	public static double getDir(double x1, double y1, double x2, double y2) {
 		return Math.atan2(y2 - y1, x2 - x1);
 	}
 	
