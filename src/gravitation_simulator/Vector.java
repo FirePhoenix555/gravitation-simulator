@@ -36,18 +36,16 @@ public class Vector {
 	}
 	
 	public Vector scale(double s) {
-//		System.out.println(y*s);
-//		System.out.println(y);
 		return new Vector(x*s, y*s);
 	}
 	
-	public static double dot(Vector a, Vector b) {
-		return a.x * b.x + a.y * b.y;
-	}
+//	public static double dot(Vector a, Vector b) {
+//		return a.x * b.x + a.y * b.y;
+//	}
 	
-	public static double crossMag(Vector a, Vector b) {
-		return a.r * b.r * Math.sin(Math.abs(a.t - b.t));
-	}
+//	public static double crossMag(Vector a, Vector b) {
+//		return a.r * b.r * Math.sin(Math.abs(a.t - b.t));
+//	}
 	
 	public static double getDir(double x1, double y1, double x2, double y2) {
 		return Math.atan2(y2 - y1, x2 - x1);

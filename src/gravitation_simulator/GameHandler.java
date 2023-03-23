@@ -7,19 +7,20 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class GameHandler extends JPanel implements Runnable {
+	
 	private static final long serialVersionUID = 1L;
 	
-	public static final double scale = 150000000000d/200; // meters per pixel
+	public static final double scale = 750000000; // meters per pixel
 	
-	final int width = 500, height = 500;
-	final static int fps = 30; // how often the game updates
+	static final int width = 500, height = 500;
+	static final int fps = 30;
 	
 	Thread gameThread;
 	
 	MouseHandler mh = new MouseHandler();
 	
-	Planet p = new Planet(width/2, height/2, 695700000);
-	Satellite s = new Satellite(p, width/2 + 200, height / 2, 6378100);
+	Planet p;
+	Satellite s;
 	
 	public GameHandler() {
 		setPreferredSize(new Dimension(width, height));
@@ -35,11 +36,14 @@ public class GameHandler extends JPanel implements Runnable {
 	
 	public void initialize() {
 		this.setBackground(Color.black);
+		
+		p = new Planet(width / 2, height / 2, 695700000); // radius of sun
+		s = new Satellite(p, width / 2 + 200, height / 2, 6378100); // radius of earth
 	}
 
 	@Override
 	public void run() {
-		double loopInterval = 1000000000/fps;
+		double loopInterval = 1000000000 / fps;
 		double nextLoopTime = System.nanoTime() + loopInterval;
 		
 		while (gameThread != null) {
@@ -47,7 +51,7 @@ public class GameHandler extends JPanel implements Runnable {
 			repaint();
 			
 			try {
-				double remainingTime = (nextLoopTime - System.nanoTime())/1000000;
+				double remainingTime = (nextLoopTime - System.nanoTime()) / 1000000;
 				if (remainingTime < 0) remainingTime = 0;
 				Thread.sleep((long) remainingTime);
 				nextLoopTime += loopInterval;
@@ -61,12 +65,12 @@ public class GameHandler extends JPanel implements Runnable {
 	private void update() {
 		mh.updateMouseLocation(this);
 		
-		double distToPlanet = Math.sqrt((s.x.x - p.x)*(s.x.x - p.x) + (s.x.y - p.y)*(s.x.y - p.y))*scale;
+		double distToPlanet = Math.sqrt((s.x.x - p.x) * (s.x.x - p.x) + (s.x.y - p.y) * (s.x.y - p.y)) * scale;
 		
-		double magnitude = (Force.G * p.mass * s.mass) / (distToPlanet*distToPlanet);
-		double direction = Vector.getDir((int) s.x.x, (int) s.x.y, p.x, p.y);
+		double magnitude = (Force.G * p.mass * s.mass) / (distToPlanet * distToPlanet);
+		double direction = Vector.getDir(s.x.x, s.x.y, p.x, p.y);
 		Force f = new Force(magnitude, direction);
-//		System.out.println(magnitude);
+		
 		s.applyForce(f);
 		s.update();
 	}

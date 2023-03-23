@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class Main {
 
 	public static void main(String[] args) {
-		JFrame window = new JFrame("Game");
+		JFrame window = new JFrame("Gravitation Simulator");
 		
 		GameHandler gh = new GameHandler();
 		window.add(gh);

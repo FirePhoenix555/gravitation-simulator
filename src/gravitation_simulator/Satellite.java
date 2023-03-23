@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 
 public class Satellite {
 	
-	public static final double spf = 1f/GameHandler.fps; // seconds per frame
-	public static final double dt = 31536000/20 * spf; // sped up by factor
+	final double spf = 1f / GameHandler.fps; // seconds per frame
+	final double dt = 1576800 * spf; // sped up by factor
 	
 	public static final double density = 5510000000d;
 	
@@ -19,7 +19,7 @@ public class Satellite {
 	public Satellite(Planet p, double x_, double y_, double r_) {
 		r = r_;
 		displayRadius = 5;
-		mass = 6 * Math.pow(10, 24);//density * 4/3f * Math.PI * r*r*r;
+		mass = 6 * Math.pow(10, 24); // density * 4/3f * Math.PI * r*r*r;
 		
 		double distToPlanet = GameHandler.scale*Math.sqrt((x_ - p.x)*(x_ - p.x) + (y_ - p.y)*(y_ - p.y));
 		
@@ -30,26 +30,15 @@ public class Satellite {
 	
 	public void draw(Graphics2D g) {
 		g.setColor(Color.white);
-		g.fillOval((int) x.x - displayRadius, (int) x.y - displayRadius, displayRadius*2, displayRadius*2);
+		g.fillOval((int) x.x - displayRadius, (int) x.y - displayRadius, displayRadius * 2, displayRadius * 2);
 	}
 	
 	public void update() {
-//		System.out.println(dt/GameHandler.scale*v.y);
 		x.add(v.scale(dt/GameHandler.scale));
-//		x.add(Vector.xy(-250, -250));
-//		x = x.scale(1/dt);
-//		x.add(Vector.xy(250, 250));
 		v.add(a.scale(dt));
-//		v = v.scale(1/dt);
-//		System.out.println(v.y);
-//		System.out.println("--");
-		
-//		a = new Vector();
 	}
 	
 	public void applyForce(Force f) {
-//		System.out.println(dt*f.x/mass);
-//		a.add(f.scale(1/mass));
-		a=f.scale(1/mass);
+		a = f.scale(1 / mass);
 	}
 }

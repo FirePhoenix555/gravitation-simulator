@@ -19,12 +19,12 @@ public class Planet {
 		y = y_;
 		r = r_;
 		
-		mass = 1.9891 * Math.pow(10,30);//density * Math.PI * r*r; // 2d volume = area
+		mass = 1.9891 * Math.pow(10,30); // density * 4/3f * Math.PI * r*r*r;
 	}
 	
 	
 	public void draw(Graphics2D g) {
 		g.setColor(Color.darkGray);
-		g.fillOval((int) x - displayRadius, (int) y - displayRadius, displayRadius*2, displayRadius*2);
+		g.fillOval((int) x - displayRadius, (int) y - displayRadius, displayRadius * 2, displayRadius * 2);
 	}
 }
